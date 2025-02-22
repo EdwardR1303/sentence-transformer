@@ -35,14 +35,11 @@ similarities = {key: [] for key in sentences.keys()}
 for label, sentences in sentences.items():
     embeddings = [get_mean_pooling_sentence_embedding(sentence) for sentence in sentences]
 
-    # Example of calculating cosine similarity
     for i in range(len(embeddings)-1):
         for x in range(i+1, len(embeddings)):
             similarity = util.cos_sim(embeddings[i], embeddings[x]).item()
             similarities[label].append((f"{i},{x}", similarity))
     avg_cos_sim = sum([x[1] for x in similarities[label]]) / len(similarities[label])
     print(f"Cosine Similarity for top 5 matches for label '{label}':" )
-    # print(type(similarities[label]))
-    # print(similarities[label])
     print(*sorted(similarities[label], key=lambda item: -item[1])[:5], sep='\n')
     print(f"Average Cosine Similarty for label group '{label}': {avg_cos_sim}")
