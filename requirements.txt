@@ -1,4 +1,6 @@
 torch
 transformers
 sentence-transformers
-sklearn
+scikit-learn
+flask
+markdown
